@@ -1,102 +1,104 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Umidjon – Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Umidjon – Portfolio + Game</title>
 
 <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
-    body{
-        background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-        color:white;
-    }
-    header{
-        display:flex;justify-content:space-between;align-items:center;
-        padding:20px 50px;
-        background:rgba(255,255,255,0.05);
-        backdrop-filter:blur(5px);
-    }
-    nav a{
-        margin-left:20px;color:#ddd;text-decoration:none;font-size:18px;
-        transition:.3s;
-    }
-    nav a:hover, .active{color:white;border-bottom:2px solid #fff;}
-    footer{
-        text-align:center;padding:20px;margin-top:50px;
-        background:rgba(255,255,255,0.08);
-    }
-      :root{
-    --bg1:#020617;
-    --bg2:#071033;
-    --accent:#ffd166;
-    --accent2:#06d6a0;
-    --muted:#9aa4c0;
-    --card:#0b1220;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  /* ====== YOUR ORIGINAL PORTFOLIO STYLES (kept + adjusted) ====== */
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
+  body{
+      background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+      color:white;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#e6eef8}
+  header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 50px;
+      background:rgba(255,255,255,0.03);
+      backdrop-filter:blur(5px);
+      position:sticky; top:0;
+      z-index:40;
+  }
+  nav a{
+      margin-left:20px;color:#ddd;text-decoration:none;font-size:18px;
+      transition:.3s;
+  }
+  nav a:hover, .active{color:white;border-bottom:2px solid #fff;}
+  footer{
+      text-align:center;padding:20px;margin-top:30px;
+      background:rgba(255,255,255,0.04);
+      margin-top:auto;
+  }
+
+  /* ====== GAME STYLES (integrated and theme-matching) ====== */
   .wrap{
-    min-height:100%;
+    width:100%;
+    max-width:1200px;
+    margin:28px auto;
     display:grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 1fr 360px;
     gap:24px;
-    padding:28px;
-    align-items:start;
+    padding:0 20px;
   }
-  @media (max-width:980px){ .wrap{grid-template-columns:1fr; padding:16px} .aside{order:2} }
-  /* GAME AREA */
+  @media (max-width:980px){
+    .wrap{grid-template-columns:1fr; padding:0 12px}
+  }
+
   .game-card{
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:16px;
+    border-radius:14px;
     padding:12px;
-    box-shadow:0 12px 40px rgba(2,6,23,0.6);
+    box-shadow:0 8px 30px rgba(2,6,23,0.6);
     position:relative;
     overflow:hidden;
+    border:1px solid rgba(255,255,255,0.02);
   }
   .canvas-wrap{
     width:100%;
-    background:radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 10%), 
-               radial-gradient(circle at 90% 80%, rgba(255,255,255,0.01), transparent 10%);
     border-radius:12px;
     padding:8px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
   }
   canvas{
     width:100%;
     height:640px;
     display:block;
-    background:linear-gradient(180deg,#000017 0%, #00102b 100%);
+    background:linear-gradient(180deg,#050411 0%, #08102a 100%);
     border-radius:10px;
     box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
     touch-action:none;
   }
-  /* SIDE PANEL */
+
   .aside{
     display:flex;
     flex-direction:column;
     gap:12px;
   }
   .panel{
-    background:var(--card);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     padding:14px;
     border-radius:12px;
     box-shadow:0 8px 24px rgba(2,6,23,0.6);
+    border:1px solid rgba(255,255,255,0.02);
   }
-  h1{margin:0;font-size:20px}
+  h1.site-title{margin:0;font-size:18px;color:#fff}
   .stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
   .stat{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding:8px 10px;border-radius:10px;font-weight:700;color:var(--accent);min-width:110px;text-align:center;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    padding:8px 10px;border-radius:10px;font-weight:700;color:#ffd166;min-width:110px;text-align:center;
   }
   .controls{display:flex;gap:8px;margin-top:12px}
   button.btn{
     padding:10px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
-    background:linear-gradient(180deg,var(--accent),#ffb03b); color:#071033;
+    background:linear-gradient(180deg,#ffd166,#ffb03b); color:#071033;
   }
-  button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-  .hint{color:var(--muted);font-size:13px;margin-top:10px}
-  /* mobile controls */
+  button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#ddd}
+  .hint{color:#bfc8e6;font-size:13px;margin-top:10px}
+
   .touch-controls{
     display:none;
     gap:14px;
@@ -111,26 +113,26 @@
     canvas{height:520px}
     .touch-controls{display:flex}
   }
-  /* overlay messages */
+
   .overlay-msg{
     position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;pointer-events:none;
     text-align:center;
   }
-  .overlay-msg .big{font-size:48px;font-weight:900;color:var(--accent2);text-shadow:0 6px 30px rgba(6,214,160,0.06)}
-  .overlay-msg .small{color:var(--muted);margin-top:8px}
-  footer{margin-top:10px;color:var(--muted);font-size:13px;text-align:center}
-  /* subtle animation for star collected */
-  .spark{
-    position:absolute;
-    pointer-events:none;
-    border-radius:50%;
-    box-shadow:0 0 14px rgba(255,209,102,0.9);
-    transform:translate(-50%,-50%) scale(0);
-    animation:pop .6s ease forwards;
-  }
+  .overlay-msg .big{font-size:44px;font-weight:900;color:#06d6a0;text-shadow:0 6px 30px rgba(6,214,160,0.06)}
+  .overlay-msg .small{color:#bfc8e6;margin-top:8px}
+  footer.small{margin-top:10px;color:#bfc8e6;font-size:13px;text-align:center}
+
+  .spark{position:absolute;pointer-events:none;border-radius:50%;box-shadow:0 0 14px rgba(255,209,102,0.9);transform:translate(-50%,-50%) scale(0);animation:pop .6s ease forwards;}
   @keyframes pop { to { transform:translate(-50%,-50%) scale(1.8); opacity:0 } }
+
+  /* small header area for integration look */
+  .hero{
+    padding:30px 50px 10px;
+    text-align:center;
+  }
+  .hero h2{font-size:28px;margin-bottom:6px}
+  .hero p{color:#c9d0f6}
 </style>
-<script src="./umidjon.js"></script>
 </head>
 
 <body>
@@ -144,62 +146,371 @@
     </nav>
 </header>
 
+<!-- HERO / Intro -->
+<section class="hero">
+  <h2>Portfolio — Game Edition</h2>
+  <p>Bu sahifa sizning portfolioingiz ichida o‘yinni namoyish etadi. Enjoy!</p>
+</section>
+
+<!-- ====== Game + Sidebar area (embedded into your portfolio layout) ====== -->
+<div class="wrap">
+
+  <section class="game-card" aria-label="Game area">
+    <div class="canvas-wrap">
+      <canvas id="game" aria-label="Star Dodger game" role="img"></canvas>
+    </div>
+
+    <div class="overlay-msg" id="overlay">
+      <div class="big" id="overlay-big">PRESS START</div>
+      <div class="small" id="overlay-small">Use ← → or A D keys — or touch controls on mobile</div>
+    </div>
+
+    <footer class="small">
+      <div style="display:flex;justify-content:center;gap:8px;align-items:center">
+        <div style="font-weight:700;color:#bfc8e6">High Score:</div>
+        <div id="high" style="font-weight:900;color:#ffd166"></div>
+      </div>
+    </footer>
+  </section>
+
+  <aside class="aside" aria-label="Game controls & stats">
+    <div class="panel">
+      <h1 class="site-title">Star Dodger</h1>
+      <div class="stats">
+        <div class="stat">Score<br><span id="score">0</span></div>
+        <div class="stat">Lives<br><span id="lives">3</span></div>
+        <div class="stat">Level<br><span id="level">1</span></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="startBtn">Start</button>
+        <button class="ghost" id="pauseBtn">Pause</button>
+        <button class="ghost" id="restartBtn">Restart</button>
+      </div>
+
+      <div class="hint">
+        Collect <strong style="color:#ffd166">★</strong> stars, avoid <strong style="color:#ff8b8b">☄</strong> meteors.
+      </div>
+
+      <div style="margin-top:12px;font-size:13px;color:#bfc8e6">Controls: ← → or A D / Touch controls below</div>
+
+      <div class="touch-controls" id="touchControls" aria-hidden="true">
+        <button id="leftTouch">◀</button>
+        <button id="shootTouch">★</button>
+        <button id="rightTouch">▶</button>
+      </div>
+    </div>
+
+    <div class="panel" style="text-align:center">
+      <div style="font-size:14px;color:#bfc8e6">Built with Canvas • Responsive • Offline-friendly</div>
+      <div style="margin-top:8px">
+        <button class="ghost" id="soundBtn">Sound: On</button>
+      </div>
+    </div>
+  </aside>
+</div>
 
 <footer>© 2025 Umidjon</footer>
-    <div class="wrap">
-    <section class="game-card">
-      <div class="canvas-wrap">
-        <canvas id="game" aria-label="Star Dodger game" role="img"></canvas>
-      </div>
 
-      <div class="overlay-msg" id="overlay">
-        <div class="big" id="overlay-big">PRESS START</div>
-        <div class="small" id="overlay-small">Use ← → or A D keys — or touch controls on mobile</div>
-      </div>
+<!-- ====== GAME SCRIPT (same as before, adapted selectors) ====== -->
+<script>
+(() => {
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
 
-      <footer>
-        <div style="display:flex;justify-content:center;gap:8px;align-items:center">
-          <div style="font-weight:700;color:var(--muted)">High Score:</div>
-          <div id="high" style="font-weight:900;color:var(--accent)"></div>
-        </div>
-      </footer>
-    </section>
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = Math.floor(rect.width * devicePixelRatio);
+    canvas.height = Math.floor(rect.height * devicePixelRatio);
+    ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
 
-    <aside class="aside">
-      <div class="panel">
-        <h1>Star Dodger</h1>
-        <div class="stats">
-          <div class="stat">Score<br><span id="score">0</span></div>
-          <div class="stat">Lives<br><span id="lives">3</span></div>
-          <div class="stat">Level<br><span id="level">1</span></div>
-        </div>
+  // UI refs
+  const overlay = document.getElementById('overlay');
+  const overlayBig = document.getElementById('overlay-big');
+  const overlaySmall = document.getElementById('overlay-small');
+  const startBtn = document.getElementById('startBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const restartBtn = document.getElementById('restartBtn');
+  const scoreEl = document.getElementById('score');
+  const livesEl = document.getElementById('lives');
+  const levelEl = document.getElementById('level');
+  const highEl = document.getElementById('high');
+  const soundBtn = document.getElementById('soundBtn');
+  const leftTouch = document.getElementById('leftTouch');
+  const rightTouch = document.getElementById('rightTouch');
+  const shootTouch = document.getElementById('shootTouch');
 
-        <div class="controls">
-          <button class="btn" id="startBtn">Start</button>
-          <button class="ghost" id="pauseBtn">Pause</button>
-          <button class="ghost" id="restartBtn">Restart</button>
-        </div>
+  let width = () => canvas.width / devicePixelRatio;
+  let height = () => canvas.height / devicePixelRatio;
 
-        <div class="hint">
-          Collect <strong style="color:var(--accent)">★</strong> stars, avoid <strong style="color:#ff8b8b">☄</strong> meteors.
-        </div>
+  // Game state
+  let running = false;
+  let paused = false;
+  let lastTime = 0;
+  let dt = 0;
+  let score = 0;
+  let lives = 3;
+  let level = 1;
+  let high = Number(localStorage.getItem('star-high') || 0);
+  highEl.textContent = high;
+  let soundOn = true;
 
-        <div style="margin-top:12px;font-size:13px;color:var(--muted)">Controls: ← → or A D / Touch controls below</div>
+  // objects
+  const player = { x: 0.5, y: 0.88, w: 48, h: 36, speed: 600, vx:0 };
+  let stars = [];
+  let meteors = [];
+  let spawnTimer = 0;
+  let spawnRate = 1.2;
+  let difficultyTimer = 0;
 
-        <div class="touch-controls" id="touchControls" aria-hidden="true">
-          <button id="leftTouch">◀</button>
-          <button id="shootTouch">★</button>
-          <button id="rightTouch">▶</button>
-        </div>
-      </div>
+  // input
+  const keys = {};
+  window.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if(e.key===' '){ e.preventDefault(); }});
+  window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
 
-      <div class="panel" style="text-align:center">
-        <div style="font-size:14px;color:var(--muted)">Built with Canvas • Responsive • Offline-friendly</div>
-        <div style="margin-top:8px">
-          <button class="ghost" id="soundBtn">Sound: On</button>
-        </div>
-      </div>
-    </aside>
-  </div>
+  // touch
+  leftTouch && leftTouch.addEventListener('touchstart', e => { e.preventDefault(); keys['arrowleft']=true; });
+  leftTouch && leftTouch.addEventListener('touchend', e => { e.preventDefault(); keys['arrowleft']=false; });
+  rightTouch && rightTouch.addEventListener('touchstart', e => { e.preventDefault(); keys['arrowright']=true; });
+  rightTouch && rightTouch.addEventListener('touchend', e => { e.preventDefault(); keys['arrowright']=false; });
+  shootTouch && shootTouch.addEventListener('click', () => { /* future action */ });
+
+  // sound
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = AudioCtx ? new AudioCtx() : null;
+  function beep(freq=440, time=0.08, type='sine', vol=0.08) {
+    if(!audioCtx || !soundOn) return;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.value = vol;
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + time);
+  }
+
+  // helpers
+  function rand(a,b){ return Math.random()*(b-a)+a }
+  function clamp(v,a,b){ return Math.max(a,Math.min(b,v)) }
+  function px(x){ return x * (width()) }
+  function spawnStar() {
+    stars.push({
+      x: Math.random(), y: -0.06,
+      r: rand(8,14), vy: rand(90,160) + level*10,
+      wob: rand(0.9,1.4), angle: Math.random()*Math.PI*2,
+    });
+  }
+  function spawnMeteor(){
+    meteors.push({
+      x: Math.random(), y: -0.12,
+      r: rand(18,36), vy: rand(160,260) + level*20,
+      rot: rand(-1.5,1.5)
+    });
+  }
+
+  // game reset
+  function reset() {
+    score = 0; lives = 3; level = 1;
+    stars = []; meteors = [];
+    spawnRate = 1.2; difficultyTimer = 0;
+    overlayBig.textContent = 'PRESS START';
+    overlaySmall.textContent = 'Use ← → or A D keys';
+    scoreEl.textContent = 0; livesEl.textContent = 3; levelEl.textContent = 1;
+    running=false; paused=false;
+  }
+  reset();
+
+  // start/pause/restart UI
+  startBtn.addEventListener('click', startGame);
+  pauseBtn.addEventListener('click', togglePause);
+  restartBtn.addEventListener('click', ()=>{ reset(); startGame(); });
+
+  soundBtn.addEventListener('click', ()=>{
+    soundOn = !soundOn; soundBtn.textContent = `Sound: ${soundOn? 'On':'Off'}`;
+    if(soundOn && audioCtx && audioCtx.state==='suspended') audioCtx.resume();
+  });
+
+  function startGame(){
+    if(running) return;
+    running = true; paused=false; spawnTimer=0; lastTime = performance.now();
+    overlay.style.display='none';
+    requestAnimationFrame(loop);
+    beep(660,0.05,'square',0.06);
+  }
+  function togglePause(){
+    if(!running) return;
+    paused = !paused;
+    overlay.style.display = paused? 'block':'none';
+    overlayBig.textContent = paused? 'PAUSED':'';
+    if(!paused) lastTime = performance.now();
+  }
+
+  function hitTest(obj){
+    const pxp = player.x * width();
+    const pyp = player.y * height();
+    const hw = player.w*0.5, hh = player.h*0.5;
+    const cx = obj.x * width(), cy = obj.y * height();
+    const distX = Math.abs(cx - pxp);
+    const distY = Math.abs(cy - pyp);
+    if(distX > (hw + obj.r)) return false;
+    if(distY > (hh + obj.r)) return false;
+    if(distX <= hw || distY <= hh) return true;
+    const dx = distX - hw, dy = distY - hh;
+    return (dx*dx + dy*dy) <= (obj.r * obj.r);
+  }
+
+  function makeSpark(x,y){
+    const el = document.createElement('div');
+    el.className='spark';
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+    document.body.appendChild(el);
+    setTimeout(()=> el.remove(), 700);
+  }
+
+  // main loop
+  function loop(now){
+    if(!running) return;
+    dt = (now - lastTime)/1000; lastTime = now;
+    if(paused) { requestAnimationFrame(loop); return; }
+
+    difficultyTimer += dt;
+    if(difficultyTimer > 12) { difficultyTimer = 0; level++; levelEl.textContent = level; spawnRate = Math.max(0.45, spawnRate - 0.12); }
+
+    spawnTimer += dt;
+    if(spawnTimer >= spawnRate){
+      spawnTimer = 0;
+      if(Math.random() < 0.25 + level*0.03) spawnMeteor(); else spawnStar();
+    }
+
+    const left = keys['arrowleft'] || keys['a'];
+    const right= keys['arrowright'] || keys['d'];
+    player.vx = 0;
+    if(left) player.vx = -player.speed;
+    if(right) player.vx = player.speed;
+    player.x += (player.vx * dt) / width();
+    player.x = clamp(player.x, 0.05, 0.95);
+
+    for(let i=stars.length-1;i>=0;i--){
+      const s = stars[i];
+      s.y += (s.vy * dt) / height();
+      s.angle += 3*dt;
+      if(s.y > 1.2) stars.splice(i,1);
+      else if(hitTest(s)){
+        score += 10;
+        scoreEl.textContent = score;
+        beep(880,0.04,'sine',0.06);
+        makeSpark((s.x*width()),(s.y*height()));
+        stars.splice(i,1);
+        if(score > high){ high = score; localStorage.setItem('star-high', high); highEl.textContent = high; }
+      }
+    }
+
+    for(let i=meteors.length-1;i>=0;i--){
+      const m = meteors[i];
+      m.y += (m.vy * dt) / height();
+      m.rot += dt;
+      if(m.y > 1.4) meteors.splice(i,1);
+      else if(hitTest(m)){
+        beep(120,0.12,'sawtooth',0.08);
+        meteors.splice(i,1);
+        lives--; livesEl.textContent = lives;
+        overlay.style.display='block';
+        overlayBig.textContent = 'OOP! HIT!';
+        overlaySmall.textContent = 'Press Restart or Start to continue';
+        running=false;
+        if(lives <= 0){
+          overlayBig.textContent = 'GAME OVER';
+          overlaySmall.textContent = `Final score: ${score}`;
+          if(score>high){ localStorage.setItem('star-high', score); high=score; highEl.textContent = high; }
+        }
+      }
+    }
+
+    ctx.clearRect(0,0,width(),height());
+
+    for(let i=0;i<60;i++){
+      ctx.fillStyle = i%7===0? 'rgba(255,255,255,0.06)':'rgba(255,255,255,0.02)';
+      const x = (i*73.7 + now*0.02) % width();
+      const y = (i*41.3) % height();
+      ctx.fillRect(x, y, 1, 1);
+    }
+
+    const shipX = player.x * width(), shipY = player.y * height();
+    ctx.save();
+    ctx.translate(shipX, shipY);
+    ctx.beginPath();
+    ctx.moveTo(0, -player.h/2);
+    ctx.lineTo(player.w/2, player.h/2);
+    ctx.lineTo(-player.w/2, player.h/2);
+    ctx.closePath();
+    ctx.fillStyle = '#06d6a0';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(0, -2, 6, 0, Math.PI*2);
+    ctx.fillStyle = '#072a2a';
+    ctx.fill();
+    ctx.restore();
+
+    for(const s of stars){
+      ctx.save();
+      ctx.translate(s.x * width(), s.y * height());
+      ctx.rotate(s.angle);
+      ctx.fillStyle = 'yellow';
+      ctx.beginPath();
+      for(let k=0;k<5;k++){
+        ctx.lineTo( Math.cos(k* (Math.PI*2)/5 ) * s.r*0.5, Math.sin(k*(Math.PI*2)/5) * s.r*0.5 );
+        ctx.lineTo( Math.cos((k+0.5)*(Math.PI*2)/5) * s.r, Math.sin((k+0.5)*(Math.PI*2)/5) * s.r );
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    for(const m of meteors){
+      ctx.save();
+      ctx.translate(m.x*width(), m.y*height());
+      ctx.rotate(m.rot);
+      ctx.fillStyle = '#ff8b8b';
+      ctx.beginPath();
+      ctx.arc(0,0,m.r*0.8,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,140,140,0.3)';
+      ctx.fillRect(-m.r*2, -m.r*0.3, m.r*2, m.r*0.6);
+      ctx.restore();
+    }
+
+    ctx.fillStyle = 'rgba(0,0,0,0.35)';
+    ctx.fillRect(8,8,120,28);
+    ctx.fillStyle = '#fff';
+    ctx.font = '14px Inter, Arial';
+    ctx.fillText('Score: ' + score, 14, 28);
+
+    requestAnimationFrame(loop);
+  } // end loop
+
+  overlayBig.textContent = 'STAR DODGER';
+  overlaySmall.textContent = 'Press START to play';
+  scoreEl.textContent = score; livesEl.textContent = lives; levelEl.textContent = level;
+
+  function adaptPlayer(){
+    player.w = Math.round(width()*0.08);
+    player.h = Math.round(player.w*0.7);
+  }
+  adaptPlayer();
+  window.addEventListener('resize', adaptPlayer);
+
+  overlay.addEventListener('click', () => {
+    if(!running){ reset(); startGame(); overlay.style.display='none'; }
+  });
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key==='Enter'){ startGame(); overlay.style.display='none'; }
+  });
+
+})();
+</script>
+
 </body>
 </html>
